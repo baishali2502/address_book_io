@@ -345,5 +345,45 @@ class AddressBook implements Serializable
 		                  .map(contact_node::toString)
 		                  .collect(Collectors.joining("\n"));
 		      }
+//		  	<-----------------------------------------UC-12-------------------------------------------->
+		    	
+				/*
+				 * @desc:Sort the address book by City using Java Streams
+				 * 
+				 * @param:none
+				 * 
+				 * @returns:none
+				 */
+		      public void sortByCityUsingStreams() {
+		          head = head.stream()
+		                  .sorted(Comparator.comparing(contact -> contact.city.toLowerCase()))
+		                  .collect(Collectors.toCollection(LinkedList::new));
+		      }
+
+				/*
+				 * @desc:Sort the address book by State using Java Streams
+				 * 
+				 * @param:none
+				 * 
+				 * @returns:none
+				 */
+		      public void sortByStateUsingStreams() {
+		          head = head.stream()
+		                  .sorted(Comparator.comparing(contact -> contact.state.toLowerCase()))
+		                  .collect(Collectors.toCollection(LinkedList::new));
+		      }
+
+				/*
+				 * @desc:Sort the address book by Zip using Java Streams
+				 * 
+				 * @param:none
+				 * 
+				 * @returns:none
+				 */
+		      public void sortByZipUsingStreams() {
+		          head = head.stream()
+		                  .sorted(Comparator.comparing(contact -> contact.zip))
+		                  .collect(Collectors.toCollection(LinkedList::new));
+		      }
  
 }
