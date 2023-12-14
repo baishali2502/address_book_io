@@ -280,5 +280,38 @@ class AddressBook implements Serializable
 		          cityDictionary = head.stream().collect(Collectors.groupingBy(contact -> contact.city));
 		          stateDictionary = head.stream().collect(Collectors.groupingBy(contact -> contact.state));
 		      }
-   
+		      
+//<--------------------------------------------UC-10---------------------------------------------->
+		      
+		    	/*
+		    	 * I've added two methods: getCountByCity and getCountByState, which use Java
+		    	 * Streams to group contacts by City and State, respectively, and then count the
+		    	 * number of contacts for each group.
+		    	 */	
+		        
+		        
+				/*
+				 * @desc:Get the count of contact persons by City using Java Streams
+				 * 
+				 * @param:none
+				 * 
+				 * @returns: group contacts by City
+				 */
+		        public Map<String, Long> getCountByCity() {
+		            return head.stream()
+		                    .collect(Collectors.groupingBy(contact -> contact.city, Collectors.counting()));
+		        }
+
+				/*
+				 * @desc:Get the count of contact persons by state using Java Streams
+				 * 
+				 * @param:none
+				 * 
+				 * @returns: group contacts by state
+				 */
+		        public Map<String, Long> getCountByState() {
+		            return head.stream()
+		                    .collect(Collectors.groupingBy(contact -> contact.state, Collectors.counting()));
+		        }
+  
 }
