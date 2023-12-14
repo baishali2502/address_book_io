@@ -139,6 +139,56 @@ class AddressBook implements Serializable
 			}
 			return editted;
 		}
+		//---------------------------------------- UC-4 --------------------------------------------
+		
+		/*
+		 * @desc:This function deletes an already existing contact
+		 * 
+		 * @params:firstname & lastname of already existing contact
+		 * 
+		 * @returns:the deleted contact
+		 */
+		contact_node delete(String firstname, String lastname) {
+			contact_node deleted_node = null;
+			// linked-list is empty
+			if (head == null)
+				return null;
+
+			for (contact_node temp : head) {
+				if (temp.firstname.equals(firstname) && temp.lastname.equals(lastname)) {
+					head.remove(temp);
+					return temp;
+				}
+
+			}
+
+			return null;
+		}
+
+		/*
+		 * @desc:This function displays all contacts in the address-book
+		 * 
+		 * @params:none
+		 * 
+		 * @returns:void
+		 */
+		void print() {
+			int count = 1;
+			for (contact_node temp : head) {
+				System.out.println("\nContact - " + count + " :- ");
+				System.out.println("\nFirstname :" + temp.firstname);
+				System.out.println("Lastname :" + temp.lastname);
+				System.out.println("Address :" + temp.address);
+				System.out.println("City :" + temp.city);
+				System.out.println("State :" + temp.state);
+				System.out.println("Zip :" + temp.zip);
+				System.out.println("Phone no. :" + temp.phone);
+				System.out.println("Email :" + temp.email);
+
+				count++;
+			}
+			System.out.println();
+		}
 
     
 }
