@@ -41,6 +41,26 @@ class AddressBook implements Serializable
 
 			return c;
 		}
+		//---------------------------------------- UC-2 ---------------------------------------------
+		
+		/*
+		 * @desc:This function adds a new contact to the address book after checking for duplicates
+		 * 
+		 * @params: the new contact to be added
+		 * 
+		 * @returns: void
+		 */
+
+	    void insert() {
+	        contact_node newcontact = create();
+
+	        if (!isDuplicate(newcontact)) {
+	            head.add(newcontact);
+	            System.out.println("New contact added\n");
+	        } else {
+	            System.out.println("Duplicate entry found. Contact not added.\n");
+	        }
+	    }
 
     
 }
