@@ -313,5 +313,37 @@ class AddressBook implements Serializable
 		            return head.stream()
 		                    .collect(Collectors.groupingBy(contact -> contact.state, Collectors.counting()));
 		        }
-  
+//<-----------------------------------------UC-11-------------------------------------------->
+		      	
+				/*
+				 * @desc:Sort the address book alphabetically by Person's name using Java
+				 * Streams
+				 * 
+				 * @param:none
+				 * 
+				 * @returns:none
+				 */
+		      
+		      public void sortByNameUsingStreams() 
+		      {
+		          head = head.stream()
+		                  .sorted(Comparator.comparing(contact -> (contact.firstname + contact.lastname).toLowerCase()))
+		                  .collect(Collectors.toCollection(LinkedList::new));
+		      }
+
+				/*
+				 * @desc:Override toString method to finally print Person Entry in Console
+				 * 
+				 * @param:none
+				 * 
+				 * @returns:String
+				 */
+		      @Override
+		      public String toString() 
+		      {
+		          return head.stream()
+		                  .map(contact_node::toString)
+		                  .collect(Collectors.joining("\n"));
+		      }
+ 
 }
