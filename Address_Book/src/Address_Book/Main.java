@@ -1,12 +1,20 @@
 package Address_Book;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 	// main function
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
+		// UC-6:
+		
+		List<AddressBook> addressbooks = new ArrayList<>(); // list of all address-books
+		
 		Scanner s = new Scanner(System.in);
-		AddressBook book = new AddressBook();
+		
+		AddressBook book = new AddressBook(); // create a new address-book
+		
+		addressbooks.add(book); // adding an address-book to the list 
 		
 		System.out.println("Welcome to Address Book Program !!");
 		System.out.println("\nMenu:-\n" 
@@ -16,9 +24,11 @@ public class Main {
 		+ "4.)Display all contacts\n"
 		+ "5.)No. of contacts\n" 
 		+ "Choose : ");
+		
 		  int choice = s.nextInt();
 		  
-			while (choice != -1) {
+			while (choice != -1) 
+			{
 				if (choice == 1) {
 					book.insert();
 					System.out.println("New contact added\n");
@@ -54,7 +64,7 @@ public class Main {
 			}
 		 
 		
-		book.loadFromFile();
+		    book.loadFromFile();
 	}
 
 }
