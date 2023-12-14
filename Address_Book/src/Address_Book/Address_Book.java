@@ -233,5 +233,52 @@ class AddressBook implements Serializable
 		                  .filter(contact -> contact.state.equalsIgnoreCase(state))
 		                  .collect(Collectors.groupingBy(contact -> contact.state));
 		      }
+		  	
+//<----------------------------------------- UC-9 -------------------------------------------->
+		  	
+		  	/*
+		  	 * I've added two dictionaries: cityDictionary and stateDictionary. These
+		  	 * dictionaries are populated using Java Streams and the Collectors,groupingBy
+		  	 * collector, which groups contacts by City and State, respectively.
+		  	 * 
+		  	 * Additionally, I've added two methods: viewPersonsByCity and
+		  	 * viewPersonsByState, which return the dictionaries of City and Person as well
+		  	 * as State and Person.
+		  	 */	
+		  	
+//            Dictionary to maintain City and Person
+		      Map<String, List<contact_node>> cityDictionary = new HashMap<>();
+//            Dictionary to maintain State and Person
+		      Map<String, List<contact_node>> stateDictionary = new HashMap<>();
+
+				/*
+				 * @desc:View persons by City using Java Streams
+				 * 
+				 * @param:none
+				 * 
+				 * @returns:cityDictionary
+				 */
+		      public Map<String, List<contact_node>> viewPersonsByCity() 
+		      {
+		          return head.stream()
+		                  .collect(Collectors.groupingBy(contact -> contact.city));
+		      }
+
+		      // View persons by State using Java Streams
+//		  	   @param:address books and state
+//		  	   @returns:stateDictionary 
+		      public Map<String, List<contact_node>> viewPersonsByState() 
+		      {
+		          return head.stream()
+		                  .collect(Collectors.groupingBy(contact -> contact.state));
+		      }
+
+//		       @desc:Initialize City and State Dictionaries
+//		  	   @param:none
+//		  	   @returns:none
+		      public void initializeDictionaries() {
+		          cityDictionary = head.stream().collect(Collectors.groupingBy(contact -> contact.city));
+		          stateDictionary = head.stream().collect(Collectors.groupingBy(contact -> contact.state));
+		      }
    
 }
