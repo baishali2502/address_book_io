@@ -385,5 +385,124 @@ class AddressBook implements Serializable
 		                  .sorted(Comparator.comparing(contact -> contact.zip))
 		                  .collect(Collectors.toCollection(LinkedList::new));
 		      }
- 
+//		  	<-----------------------------------------UC-13-------------------------------------------->
+		      
+		    	/*
+		    	 * @desc:This function appends new data to existing data in file (if file
+		    	 *       exists). 
+		    	 *       If the file does not exist , then it creates a file and writes into
+		    	 *       it
+		    	 * 
+		    	 * @params:none
+		    	 * 
+		    	 * @returns:none
+		    	 */
+		    	 public void appendToFile() {
+		    	        try (BufferedWriter writer = new BufferedWriter(new FileWriter("addressbook1.txt", true))) {
+		    	            for (contact_node contact : head) 
+		    	            {
+		    	                // Write each contact's information as text
+		    	                writer.write("Firstname: " + contact.firstname);
+		    	                writer.newLine();
+		    	                writer.write("Lastname: " + contact.lastname);
+		    	                writer.newLine();
+		    	                writer.write("Email: " + contact.email);
+		    	                writer.newLine();
+		    	                writer.write("Address: " + contact.address);
+		    	                writer.newLine();
+		    	                writer.write("City: " + contact.city);
+		    	                writer.newLine();
+		    	                writer.write("State: " + contact.state);
+		    	                writer.newLine();
+		    	                writer.write("Zip: " + contact.zip);
+		    	                writer.newLine();
+		    	                writer.write("Phone: " + contact.phone);
+		    	                writer.newLine();
+		    	              
+		    	                writer.newLine(); // Separate contacts with an empty line
+		    	            }
+		    	            System.out.println("Address book appended successfully.");
+		    	        } catch (IOException e) {
+		    	            e.printStackTrace();
+		    	        }
+		    	    }
+		    	 /*
+		    		 * @desc:This function reads data from an existing data in file (if file
+		    		 *       exists). 
+		    		 *       If the file does not exist , then it shows FileNotFoundException
+		    		 * 
+		    		 * @params:none
+		    		 * 
+		    		 * @returns:none
+		    		 */
+		    	 public void loadFromFile() {
+		    		    try (BufferedReader reader = new BufferedReader(new FileReader("addressbook1.txt"))) {
+		    		        String line;
+		    		        contact_node contact = new contact_node();
+
+		    		        while ((line = reader.readLine()) != null) {
+		    		            String[] parts = line.split(":");
+		    		            if (parts.length == 2) {
+		    		                String fieldName = parts[0].trim();
+		    		                String fieldValue = parts[1].trim();
+
+		    		                switch (fieldName) {
+		    		                    case "Firstname":
+		    		                        contact.firstname = fieldValue;
+		    		                        break;
+		    		                    case "Lastname":
+		    		                        contact.lastname = fieldValue;
+		    		                        break;
+		    		                    case "Email":
+		    		                        contact.email = fieldValue;
+		    		                        break;
+		    		                    case "Address":
+		    		                        contact.address = fieldValue;
+		    		                        break;
+		    		                    case "City":
+		    		                        contact.city = fieldValue;
+		    		                        break;
+		    		                    case "State":
+		    		                        contact.state = fieldValue;
+		    		                        break;
+		    		                    case "Zip":
+		    		                        contact.zip = Long.parseLong(fieldValue);
+		    		                        break;
+		    		                    case "Phone":
+		    		                        contact.phone = Long.parseLong(fieldValue);
+		    		                        break;
+		    		                }
+		    		            } else if (line.trim().isEmpty()) {
+		    		                // Empty line, consider it as a separator between contacts
+		    		                printContactDetails(contact);
+		    		                contact = new contact_node(); // Start a new contact
+		    		            }
+		    		        }
+
+		    		        // Print the details of the last contact in case the file doesn't end with an empty line
+		    		        if(contact.firstname!=null)
+		    		            printContactDetails(contact);
+		    		        else
+		    		            System.out.println("Address book loaded successfully.");
+		    		        
+		    		    } catch (FileNotFoundException e) {
+		    		        System.out.println("No existing address book file found. Starting with an empty address book.");
+		    		    } catch (IOException e) {
+		    		        e.printStackTrace();
+		    		    }
+		    		}
+
+		    		private void printContactDetails(contact_node contact) {
+		    		    // Print the contact details to the console
+		    		    System.out.println("\nContact Details:");
+		    		    System.out.println("Firstname: " + contact.firstname);
+		    		    System.out.println("Lastname: " + contact.lastname);
+		    		    System.out.println("Address: " + contact.address);
+		    		    System.out.println("City: " + contact.city);
+		    		    System.out.println("State: " + contact.state);
+		    		    System.out.println("Zip: " + contact.zip);
+		    		    System.out.println("Phone: " + contact.phone);
+		    		    System.out.println("Email: " + contact.email);
+		    		}
+
 }
