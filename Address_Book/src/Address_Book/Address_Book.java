@@ -204,5 +204,34 @@ class AddressBook implements Serializable
 		    public boolean isDuplicate(contact_node person) {
 		        return head.stream().anyMatch(existingPerson -> existingPerson.equals(person));
 		    }
-    
+		    //<----------------------------------------- UC-8 -------------------------------------------->
+		  	/*
+		  	 * I've added two static methods: searchPersonsInCity and searchPersonsInState.
+		  	 * These methods take a list of AddressBook instances and a City or State as
+		  	 * input, and they use Java Streams to search for persons in the specified City
+		  	 * or State across multiple address books. The results are grouped by City or
+		  	 * State.
+		  	*/
+		      
+		      
+		  	// @desc:Search for persons in a specific City across multiple AddressBooks using Java Streams
+//		  	   @param:address books and cityname
+//		  	   @returns:person and the list of cities 
+		  	public static Map<String, List<contact_node>> searchPersonsInCity(List<AddressBook> addressBooks, String city) {
+		          return addressBooks.stream()
+		                  .flatMap(book -> book.head.stream())
+		                  .filter(contact -> contact.city.equalsIgnoreCase(city))
+		                  .collect(Collectors.groupingBy(contact -> contact.city));
+		      }
+
+		      // Search for persons in a specific State across multiple AddressBooks using Java Streams
+//		  	   @param:address books and cityname
+//		  	   @returns:person and the list of cities 
+		  	public static Map<String, List<contact_node>> searchPersonsInState(List<AddressBook> addressBooks, String state) {
+		          return addressBooks.stream()
+		                  .flatMap(book -> book.head.stream())
+		                  .filter(contact -> contact.state.equalsIgnoreCase(state))
+		                  .collect(Collectors.groupingBy(contact -> contact.state));
+		      }
+   
 }
