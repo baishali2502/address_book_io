@@ -61,6 +61,84 @@ class AddressBook implements Serializable
 	            System.out.println("Duplicate entry found. Contact not added.\n");
 	        }
 	    }
+	  //---------------------------------------- UC-3 ---------------------------------------------
+	    
+		/*
+		 * @desc:This function edits an already present contact
+		 * 
+		 * @params:firstname and lastname of already present contact
+		 * 
+		 * @returns:void
+		 */
+		boolean editContact(String first, String last) {
+			boolean editted = false;
+			Scanner s = new Scanner(System.in);
+			// contact_node temp = head;
+			for (contact_node temp : head) {
+				if (temp.firstname.equals(first) && temp.lastname.equals(last)) {
+					editted = true;
+					System.out.println("Do you want to change firstname?");
+					boolean changefirst = s.nextBoolean();
+					if (changefirst) {
+						System.out.print("Enter new firstname : ");
+						temp.firstname = s.next();
+					}
+
+					System.out.println("Do you want to change lastname?");
+					boolean changelast = s.nextBoolean();
+					if (changelast) {
+						System.out.print("Enter new lastname : ");
+						temp.lastname = s.next();
+					}
+
+					System.out.print("Do you want to change email?");
+					boolean changeemail = s.nextBoolean();
+					if (changeemail) {
+						System.out.print("Enter new email-id : ");
+						temp.email = s.next();
+					}
+
+					System.out.print("Do you want to change address?");
+					boolean changeaddress = s.nextBoolean();
+					if (changeaddress) {
+						System.out.print("Enter new address : ");
+						temp.address = s.next();
+					}
+
+					System.out.print("Do you want to change city?");
+					boolean changecity = s.nextBoolean();
+					if (changecity) {
+						System.out.print("Enter new city : ");
+						temp.city = s.next();
+					}
+
+					System.out.print("Do you want to change state?");
+					boolean changestate = s.nextBoolean();
+					if (changestate) {
+						System.out.print("Enter new state : ");
+						temp.state = s.next();
+					}
+
+					System.out.print("Do you want to change zip?");
+					boolean changezip = s.nextBoolean();
+					if (changezip) {
+						System.out.print("Enter new zip : ");
+						temp.zip = s.nextInt();
+					}
+
+					System.out.print("Do you want to change phone?");
+					boolean changephone = s.nextBoolean();
+					if (changephone) {
+						System.out.print("Enter new phone : ");
+						temp.phone = s.nextLong();
+					}
+
+					return true;
+				}
+
+			}
+			return editted;
+		}
 
     
 }
