@@ -190,5 +190,19 @@ class AddressBook implements Serializable
 			System.out.println();
 		}
 
+		//<----------------------------------------- UC-7 -------------------------------------------->
+			/*
+			 * To ensure that there are no duplicate entries of the same person in a
+			 * particular address book, you can modify your AddressBook class by overriding
+			 * the equals method in the contact_node class and using collection methods and
+			 * Java Streams for duplicate checks.
+			 */
+			
+			// @desc:Check for duplicate entry before adding a person to the address book
+//			   @param:contact
+//			   @returns:void
+		    public boolean isDuplicate(contact_node person) {
+		        return head.stream().anyMatch(existingPerson -> existingPerson.equals(person));
+		    }
     
 }
